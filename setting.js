@@ -5,21 +5,21 @@
 	var dmid=vodid,dmsid=vodsid;
 	}
 	//var dmid=vodid+" "+vodsid,dmsid=vodsid;
-        if( laoding > 0){}else{ var css ='<style type="text/css">';css+='#loading-box{display: none;}';css+='</style>';$('body').append(css).addClass("");}    // ¼ÓÔØ²¥·ÅÆ÷
+        if( laoding > 0){}else{ var css ='<style type="text/css">';css+='#loading-box{display: none;}';css+='</style>';$('body').append(css).addClass("");}    // åŠ è½½æ’­æ”¾å™¨
     if( danmuon > 0){
 	var dp = new yzmplayer({autoplay: autoplay,element: document.getElementById('player'),theme: color,logo: logo,video: {url: vodurl,pic: vodpic,type: 'auto',},danmaku: {id: dmid,api: dmapi,user: user,}});
 	}else{$('body').addClass("danmu-off");
 	var dp = new yzmplayer({autoplay: autoplay,element: document.getElementById('player'),theme: color,logo: logo,video: {url: vodurl,pic: vodpic,type: 'auto',},});}
-    // µ¯³ö¿ò
+    // å¼¹å‡ºæ¡†
     //function alert_back(text) {$(".alert_back").html(text).show();setTimeout(function () { $(".alert_back").fadeOut('slow'); },1200)}
-    // Í¨ÓÃµã»÷
+    // é€šç”¨ç‚¹å‡»
 	add('.yzmplayer-list-icon',".yzmplayer-danmu",'show');
 	function add(div1,div2,div3,div4) {$(div1).click(function() {$(div2).toggleClass(div3);$(div4).remove();});}
-    //Ãë×ª·ÖÃë
+    //ç§’è½¬åˆ†ç§’
     function formatTime(seconds) {return [parseInt(seconds / 60 / 60),parseInt(seconds / 60 % 60),parseInt(seconds % 60)].join(":").replace(/\b(\d)\b/g, "0$1");}
-	//ÉèÖÃä¯ÀÀÆ÷»º´æÏîÖµ£¬²ÎÊı£ºÏîÃû,Öµ,ÓĞĞ§Ê±¼ä(Ğ¡Ê±)
+	//è®¾ç½®æµè§ˆå™¨ç¼“å­˜é¡¹å€¼ï¼Œå‚æ•°ï¼šé¡¹å,å€¼,æœ‰æ•ˆæ—¶é—´(å°æ—¶)
 	function setCookie(c_name, value, expireHours) {var exdate = new Date();exdate.setHours(exdate.getHours() + expireHours);document.cookie = c_name + "=" + escape(value) + ((expireHours === null) ? "" : ";expires=" + exdate.toGMTString());}
-	//»ñÈ¡ä¯ÀÀÆ÷»º´æÏîÖµ£¬²ÎÊı£ºÏîÃû
+	//è·å–æµè§ˆå™¨ç¼“å­˜é¡¹å€¼ï¼Œå‚æ•°ï¼šé¡¹å
 	function getCookie(c_name) {if (document.cookie.length > 0) {c_start = document.cookie.indexOf(c_name + "=");if (c_start !== -1) {c_start = c_start + c_name.length + 1;c_end = document.cookie.indexOf(";", c_start);if (c_end === -1) {c_end = document.cookie.length;};return unescape(document.cookie.substring(c_start, c_end));}}return "";}
 	dp.on("loadedmetadata", function () {loadedmetadataHandler();});
     dp.on("ended", function () {endedHandler();});
@@ -28,21 +28,21 @@
     function loadedmetadataHandler() {
         if ( playtime > 0 && dp.video.currentTime < playtime) {
                    setTimeout(function () {video_con_play() }, 1 * 1000);
-        } else { dp.notice("ÊÓÆµÒÑ×¼±¸¾ÍĞ÷£¬¼´½«ÎªÄú²¥·Å");setTimeout(function () {video_play() }, 1 * 1000);}
+        } else { dp.notice("è§†é¢‘å·²å‡†å¤‡å°±ç»ªï¼Œå³å°†ä¸ºæ‚¨æ’­æ”¾");setTimeout(function () {video_play() }, 1 * 1000);}
                    dp.on("timeupdate", function () {timeupdateHandler();});
 	}
-	//²¥·Å½ø¶È»Øµ÷  	
+	//æ’­æ”¾è¿›åº¦å›è°ƒ  	
     function timeupdateHandler() {setCookie("time_"+ vodurl,dp.video.currentTime,24);}
-    //²¥·Å½áÊø»Øµ÷		
+    //æ’­æ”¾ç»“æŸå›è°ƒ		
     function endedHandler() {
     setCookie("time_"+ vodurl,"",-1);
-    if (next!='') {dp.notice("5sºó,½«×Ô¶¯ÎªÄú²¥·ÅÏÂÒ»¼¯");setTimeout(function () {video_next();}, 5 * 1000);
-         } else{dp.notice("ÊÓÆµ²¥·ÅÒÑ½áÊø");setTimeout(function () {video_end();}, 2 * 1000); }}
+    if (next!='') {dp.notice("5så,å°†è‡ªåŠ¨ä¸ºæ‚¨æ’­æ”¾ä¸‹ä¸€é›†");setTimeout(function () {video_next();}, 5 * 1000);
+         } else{dp.notice("è§†é¢‘æ’­æ”¾å·²ç»“æŸ");setTimeout(function () {video_end();}, 2 * 1000); }}
     if (next!=''){ }else {$(".icon-xj").remove();};
     function video_next() {top.location.href = playnext;}
     function video_seek() {dp.seek(playtime);}
     $(".yzmplayer-showing").on("click", function () {dp.play();$(".vod-pic").remove();});
-    //¸öĞÔ»¯µ¯Ä»¿ò		
+    //ä¸ªæ€§åŒ–å¼¹å¹•æ¡†		
 	$(".yzmplayer-comment-setting-color input").on("click", function () {
     var textcolor = $(this).attr("value"); 
     setTimeout(function (){$('.yzm-yzmplayer-comment-input').css({"color":textcolor});}, 100);
@@ -63,13 +63,13 @@
     var sendtype =$('.yzm-yzmplayer-comment-input').attr("dmtype");
     var sendcolor = $('.yzmplayer-comment-input').css("color"); 
     var sendtext = sendtexts.replace(new RegExp(pbgjz.join('|'),'img'),'*');
-    if(sendtext.length < 1){dp.notice("ÒªÊäÈëµ¯Ä»ÄÚÈİ°¡Î¹£¡");return;
+    if(sendtext.length < 1){dp.notice("è¦è¾“å…¥å¼¹å¹•å†…å®¹å•Šå–‚ï¼");return;
     }else{dp.danmaku.send({text: sendtext,color: sendcolor,type: sendtype,});
     };
     $(".yzm-yzmplayer-comment-input").val("");
     })
 dp.danmaku.opacity(1);
-    //µ¯Ä»ÁĞ±í»ñÈ¡
+    //å¼¹å¹•åˆ—è¡¨è·å–
 	
 $(".yzmplayer-list-icon,.yzm-yzmplayer-send-icon").on("click", function () {		   
 	$(".list-show").empty();
@@ -92,15 +92,15 @@ $(".yzmplayer-list-icon,.yzm-yzmplayer-send-icon").on("click", function () {
          setTimeout(function () {$("#link2").fadeIn();}, 1 * 1000);
          setTimeout(function () {$("#link3,#span").fadeIn();}, 2 * 1000);
          $(".yzmplayer-fulloff-icon").on("click", function () {dp.fullScreen.cancel();})
-    //²¥·ÅloadingÔªËØ		
+    //æ’­æ”¾loadingå…ƒç´ 		
 function video_play() {
-         $("#link3").text("ÊÓÆµÒÑ×¼±¸¾ÍĞ÷£¬¼´½«ÎªÄú²¥·Å");
+         $("#link3").text("è§†é¢‘å·²å‡†å¤‡å°±ç»ªï¼Œå³å°†ä¸ºæ‚¨æ’­æ”¾");
          setTimeout(function () {dp.play();$("#loading-box").remove();}, 1 * 1500);
 	};
 function video_con_play() {
         if( laoding > 0)
         {
-         var conplayer = ` <e>ÒÑ²¥·ÅÖÁ${ctime}£¬¼ÌĞøÉÏ´Î²¥·Å£¿</e><d class="conplay-jump">ÊÇ <i id="num">10</i>s</d><d class="conplaying">·ñ</d>`
+         var conplayer = ` <e>å·²æ’­æ”¾è‡³${ctime}ï¼Œç»§ç»­ä¸Šæ¬¡æ’­æ”¾ï¼Ÿ</e><d class="conplay-jump">æ˜¯ <i id="num">10</i>s</d><d class="conplaying">å¦</d>`
          $("#link3").html(conplayer);
          //setTimeout(function () {$("#laoding-pic,.memory-play-wrap,#loading-box").remove();dp.play();}, 15 * 1000);
          var span = document.getElementById('num');
@@ -116,7 +116,7 @@ function video_con_play() {
 		},1000);
 	},1 );
 	}else{dp.play();}
-         var cplayer = `<div class="memory-play-wrap"><div class="memory-play"><span class="close">¡Á</span><span>ÉÏ´Î¿´µ½ </span><span>${ctime}</span><span class="play-jump">Ìø×ª²¥·Å</span></div></div>`
+         var cplayer = `<div class="memory-play-wrap"><div class="memory-play"><span class="close">Ã—</span><span>ä¸Šæ¬¡çœ‹åˆ° </span><span>${ctime}</span><span class="play-jump">è·³è½¬æ’­æ”¾</span></div></div>`
              $(".yzmplayer-cplayer").append(cplayer);
              $(".close").on("click", function () {$(".memory-play-wrap").remove();});
              setTimeout(function () {$(".memory-play-wrap").remove();}, 20 * 1000);
